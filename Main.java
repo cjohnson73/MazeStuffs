@@ -197,16 +197,16 @@ public class Main
 						g.setColor(gend?new Color(0, 0, 255):new Color(0, 255, 255));
 					g.fillRect(tsize*c.x, tsize*c.y, tsize, tsize);
 				}
-				else if(stack.contains(c) && gend)
+				else if(stack.contains(c))
 				{
 					if(solve.contains(c))
 						continue;
-					g.setColor(new Color(255, 0, 0));
+					g.setColor(gend?new Color(255, 0, 0):new Color(0, 255, 255));
 					g.fillRect(tsize*c.x, tsize*c.y, tsize, tsize);
 				}
 				if(i==0 && j==0)
 				{
-					g.setColor(gend?new Color(255, 255, 255):new Color(255, 255, 0));
+					g.setColor(gend?new Color(255, 255, 255):new Color(0, 0, 0));
 					g.fillRect(tsize*c.x, tsize*c.y, tsize, tsize);
 				}
 				else if(c.v && !stack.contains(c) && !solve.contains(c))
