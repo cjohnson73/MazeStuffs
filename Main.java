@@ -15,8 +15,8 @@ public class Main
 	static int fps = 60;
 	static int tsize, w, h;
 	static boolean play = true;
-	static int cols = 100;
-	static int rows = 50;
+	static int cols = 200;
+	static int rows = 100;
 	static JFrame frame;
 	static Graphics g;
 	static BufferStrategy bs;
@@ -72,14 +72,14 @@ public class Main
 		}
 		sx = 0;
 		sy = 0;
+		gx = cols-1;
+		gy = rows-1;
 		current = grid[sx][sy];
 		stack.add(current);
 		solve.add(current);
 		current.v = true;
 		solved = false;
 		gend = true;
-		gx = cols-1;
-		gy = rows-1;
 		initRender();
 	}
 	public static void solInit()
@@ -94,7 +94,16 @@ public class Main
 				grid[i][j].v = false;
 			}
 		}
-		current = grid[sf?sx:gx][sf?sy:gy];
+		if(!sf)
+		{
+			int a = sx;
+			sx = gx;
+			gx = a;
+			a = sy;
+			sy = gy;
+			gy = a;
+		}
+		current = grid[sx][sy];
 		stack.add(current);
 		solve.add(current);
 		current.v = true;
@@ -144,7 +153,7 @@ public class Main
 				stack.remove(stack.size()-1);
 				current = stack.get(stack.size()-1);
 			}
-			if(!solved && current.x==(sf?gx:sx) && current.y==(sf?gy:sy))
+			if(!solved && current.x==gx && current.y==gy)
 			{
 				solved = true;//*/
 				gend = true;
